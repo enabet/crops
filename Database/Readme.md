@@ -11,6 +11,10 @@ This folder contains all database-related documentation and design artifacts for
 
 The database architecture is built on **PostgreSQL** with **PostGIS** and is designed to support a multi-tenant agricultural platform.
 
+
+## Online free tool used 
+**dbdiagram.io **:  https://dbdiagram.io/d/CROP-6a4f215636d348d1209ec03d
+
 ## Included Database Domains
 
 The documentation and diagrams in this folder cover the following core platform components:
