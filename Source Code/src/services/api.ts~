@@ -1,0 +1,14 @@
+import axios from "axios";
+
+const fallbackApiUrl =
+  `${window.location.protocol}//${window.location.hostname}:8001/api`;
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL || fallbackApiUrl,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export { api };
+export default api;

@@ -1,0 +1,10 @@
+Runtime dependencies:
+leaflet
+react-leaflet
+
+Development dependency:
+@types/leaflet
+
+Install:
+npm install leaflet react-leaflet
+npm install -D @types/leaflet
