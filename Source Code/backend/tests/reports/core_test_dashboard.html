@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CARDI Core Test Dashboard</title>
+  <style>
+    :root {
+      --bg: #f7f8f4;
+      --panel: #ffffff;
+      --ink: #16221a;
+      --muted: #65736b;
+      --line: #dfe5da;
+      --green: #2f7653;
+      --green-soft: #e8f4ed;
+      --gold: #c98c31;
+      --red: #be3b3b;
+      --red-soft: #fae8e8;
+      --shadow: 0 16px 38px rgba(22, 34, 26, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 8px 0 8px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .eyebrow {
+      display: inline-flex;
+      border: 1px solid #cfe1d6;
+      background: var(--green-soft);
+      color: var(--green);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+    .status {
+      border-radius: 8px;
+      padding: 12px 14px;
+      border: 1px solid #cfe1d6;
+      background: #e8f4ed;
+      color: #2f7653;
+      font-weight: 800;
+      min-width: 160px;
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+    .summary {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .metric-label {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+    }
+    .metric-value {
+      margin-top: 10px;
+      font-size: 2.1rem;
+      font-weight: 900;
+    }
+    .metric-detail {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .main-layout {
+      grid-template-columns: 0.88fr 1.12fr;
+      align-items: stretch;
+      margin-bottom: 16px;
+    }
+    .donut-wrap {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .donut {
+      width: 180px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) 0 100.00%, #e5e9df 100.00% 100%);
+      display: grid;
+      place-items: center;
+    }
+    .donut::after {
+      content: "100%";
+      width: 112px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--panel);
+      color: var(--ink);
+      font-size: 2rem;
+      font-weight: 900;
+      border: 1px solid var(--line);
+    }
+    .legend {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .legend-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 800;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 70px;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+    .track {
+      height: 12px;
+      border-radius: 999px;
+      background: #edf0e8;
+      overflow: hidden;
+    }
+    .fill {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+    }
+    .two-column {
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th {
+      text-align: left;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcf8;
+    }
+    td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .pill {
+      display: inline-flex;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.76rem;
+      font-weight: 900;
+      background: var(--green-soft);
+      color: var(--green);
+      white-space: nowrap;
+    }
+    .pill.failed, .pill.error {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+    .pill.skipped {
+      background: #f6eddb;
+      color: var(--gold);
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    .footer-note {
+      margin-top: 18px;
+      font-size: 0.9rem;
+    }
+    code {
+      background: #edf0e8;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 6px;
+      color: var(--ink);
+    }
+    @media (max-width: 860px) {
+      header, .donut-wrap { display: block; }
+      .summary, .main-layout, .two-column { grid-template-columns: 1fr; }
+      .status { margin-top: 14px; text-align: left; }
+      .donut { margin: 18px 0; }
+      .bar-row { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <span class="eyebrow">CARDI Test Dashboard</span>
+        <h1>Core Module Test Results</h1>
+        <p>Generated 2026-07-20 21:33:01 UTC. Standalone validation for GIS, gamification, farmer profile, and crop record rules.</p>
+      </div>
+      <div class="status">All tests passed</div>
+    </header>
+
+    <section class="grid summary" aria-label="Summary metrics">
+      
+      <article class="panel">
+        <div class="metric-label">Total Tests</div>
+        <div class="metric-value">31</div>
+        <div class="metric-detail">Discovered standalone tests</div>
+      </article>
+    
+      
+      <article class="panel">
+        <div class="metric-label">Passed</div>
+        <div class="metric-value">31</div>
+        <div class="metric-detail">Successful assertions</div>
+      </article>
+    
+      
+      <article class="panel">
+        <div class="metric-label">Total Time</div>
+        <div class="metric-value">0.96 ms</div>
+        <div class="metric-detail">End-to-end runner time</div>
+      </article>
+    
+      
+      <article class="panel">
+        <div class="metric-label">Average</div>
+        <div class="metric-value">0.017 ms</div>
+        <div class="metric-detail">Per-test execution time</div>
+      </article>
+    
+    </section>
+
+    <section class="grid main-layout">
+      <div class="panel">
+        <h2>Pass Rate</h2>
+        <div class="donut-wrap">
+          <div class="donut" aria-label="Pass rate 100 percent"></div>
+          <div>
+            <p>The standalone suite is grouped by functional area, with failures and errors surfaced separately from skipped tests.</p>
+            <div class="legend">
+              <div class="legend-row"><span>Passed</span><span>31</span></div>
+              <div class="legend-row"><span>Failed</span><span>0</span></div>
+              <div class="legend-row"><span>Errors</span><span>0</span></div>
+              <div class="legend-row"><span>Skipped</span><span>0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Module Coverage and Runtime</h2>
+        
+            <div class="bar-row">
+              <span>Crop Records</span>
+              <div class="track"><div class="fill" style="width: 75.49%"></div></div>
+              <span>0.154 ms</span>
+            </div>
+            
+
+            <div class="bar-row">
+              <span>Farmer Profile</span>
+              <div class="track"><div class="fill" style="width: 24.02%"></div></div>
+              <span>0.049 ms</span>
+            </div>
+            
+
+            <div class="bar-row">
+              <span>GIS / Spatial</span>
+              <div class="track"><div class="fill" style="width: 100.00%"></div></div>
+              <span>0.204 ms</span>
+            </div>
+            
+
+            <div class="bar-row">
+              <span>Gamification</span>
+              <div class="track"><div class="fill" style="width: 63.24%"></div></div>
+              <span>0.129 ms</span>
+            </div>
+            
+      </div>
+    </section>
+
+    <section class="grid two-column">
+      <div class="panel">
+        <h2>Tests by Module</h2>
+        
+            <div class="bar-row">
+              <span>Crop Records</span>
+              <div class="track"><div class="fill" style="width: 72.73%"></div></div>
+              <span>8 tests</span>
+            </div>
+            
+
+            <div class="bar-row">
+              <span>Farmer Profile</span>
+              <div class="track"><div class="fill" style="width: 36.36%"></div></div>
+              <span>4 tests</span>
+            </div>
+            
+
+            <div class="bar-row">
+              <span>GIS / Spatial</span>
+              <div class="track"><div class="fill" style="width: 72.73%"></div></div>
+              <span>8 tests</span>
+            </div>
+            
+
+            <div class="bar-row">
+              <span>Gamification</span>
+              <div class="track"><div class="fill" style="width: 100.00%"></div></div>
+              <span>11 tests</span>
+            </div>
+            
+      </div>
+      <div class="panel">
+        <h2>Slowest Tests</h2>
+        
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Module</th><th>Test</th><th>Duration</th></tr></thead>
+          <tbody>
+        <tr>
+          <td>GIS / Spatial</td>
+          <td>test_latitude_above_90_raises_error</td>
+          <td>0.088 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td>Crop Records</td>
+          <td>test_all_valid_statuses_are_accepted</td>
+          <td>0.067 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td>GIS / Spatial</td>
+          <td>test_longitude_above_180_raises_error</td>
+          <td>0.040 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td>Gamification</td>
+          <td>test_unknown_badge_is_not_earned</td>
+          <td>0.029 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td>Crop Records</td>
+          <td>test_invalid_decimal_payload_is_rejected</td>
+          <td>0.024 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td>GIS / Spatial</td>
+          <td>test_haversine_distance_belize_to_jamaica</td>
+          <td>0.024 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td>Farmer Profile</td>
+          <td>test_missing_country_and_district_are_rejected</td>
+          <td>0.017 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td>Gamification</td>
+          <td>test_100_points_reaches_level_two</td>
+          <td>0.017 ms</td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Detailed Test Results</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Module</th>
+              <th>Test</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_all_valid_statuses_are_accepted</td>
+          <td>0.067 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_invalid_decimal_payload_is_rejected</td>
+          <td>0.024 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_invalid_status_is_rejected</td>
+          <td>0.014 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_missing_crop_and_farm_are_rejected</td>
+          <td>0.011 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_missing_planting_date_is_rejected</td>
+          <td>0.011 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_negative_land_area_is_rejected</td>
+          <td>0.009 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_valid_crop_record_passes_validation</td>
+          <td>0.009 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Crop Records</td>
+          <td>test_zero_land_area_is_rejected</td>
+          <td>0.009 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Farmer Profile</td>
+          <td>test_missing_country_and_district_are_rejected</td>
+          <td>0.017 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Farmer Profile</td>
+          <td>test_negative_years_experience_is_rejected</td>
+          <td>0.011 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Farmer Profile</td>
+          <td>test_valid_farmer_profile_passes_validation</td>
+          <td>0.011 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Farmer Profile</td>
+          <td>test_zero_total_land_is_rejected</td>
+          <td>0.010 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_farm_area_one_hectare_calculation</td>
+          <td>0.010 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_haversine_distance_belize_to_jamaica</td>
+          <td>0.024 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_haversine_same_point_is_zero</td>
+          <td>0.010 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_latitude_above_90_raises_error</td>
+          <td>0.088 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_latitude_below_minus_90_raises_error</td>
+          <td>0.016 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_longitude_above_180_raises_error</td>
+          <td>0.040 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_valid_belize_coordinates_are_accepted</td>
+          <td>0.010 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>GIS / Spatial</td>
+          <td>test_valid_jamaica_coordinates_are_accepted</td>
+          <td>0.006 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_100_points_reaches_level_two</td>
+          <td>0.017 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_500_points_reaches_level_six</td>
+          <td>0.011 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_99_points_still_level_one_boundary</td>
+          <td>0.008 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_active_farmer_crosses_multiple_levels</td>
+          <td>0.014 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_first_harvest_badge_condition</td>
+          <td>0.008 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_forum_helper_badge_condition</td>
+          <td>0.008 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_harvest_badge_not_earned_without_harvests</td>
+          <td>0.007 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_new_farmer_onboarding_points</td>
+          <td>0.010 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_unknown_action_awards_zero_points</td>
+          <td>0.007 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_unknown_badge_is_not_earned</td>
+          <td>0.029 ms</td>
+        </tr>
+        
+
+        <tr>
+          <td><span class="pill passed">PASSED</span></td>
+          <td>Gamification</td>
+          <td>test_zero_points_starts_at_level_one</td>
+          <td>0.009 ms</td>
+        </tr>
+        
+          </tbody>
+        </table>
+      </div>
+      <p class="footer-note">Run with <code>python3 -m tests.core_dashboard</code> from <code>backend/</code>. Metrics JSON is written beside this HTML file.</p>
+    </section>
+  </main>
+</body>
+</html>

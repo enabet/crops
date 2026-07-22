@@ -1,0 +1,411 @@
+{
+  "generated_at": "2026-07-20T21:33:01.873349+00:00",
+  "summary": {
+    "total": 31,
+    "passed": 31,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pass_rate": 100.0,
+    "total_elapsed_ms": 0.956,
+    "average_test_ms": 0.017,
+    "slowest_test_ms": 0.088
+  },
+  "groups": [
+    {
+      "name": "Crop Records",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_ms": 0.154,
+      "average_ms": 0.019
+    },
+    {
+      "name": "Farmer Profile",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_ms": 0.049,
+      "average_ms": 0.012
+    },
+    {
+      "name": "GIS / Spatial",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_ms": 0.204,
+      "average_ms": 0.026
+    },
+    {
+      "name": "Gamification",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_ms": 0.129,
+      "average_ms": 0.012
+    }
+  ],
+  "slowest": [
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_latitude_above_90_raises_error",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_latitude_above_90_raises_error",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.08809997234493494,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_all_valid_statuses_are_accepted",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_all_valid_statuses_are_accepted",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.0665000407025218,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_longitude_above_180_raises_error",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_longitude_above_180_raises_error",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.040499959141016006,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_unknown_badge_is_not_earned",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_unknown_badge_is_not_earned",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.02889998722821474,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_invalid_decimal_payload_is_rejected",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_invalid_decimal_payload_is_rejected",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.0241999514400959,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_haversine_distance_belize_to_jamaica",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_haversine_distance_belize_to_jamaica",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.02380006480962038,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.FarmerProfileValidationCoreTests.test_missing_country_and_district_are_rejected",
+      "class_name": "FarmerProfileValidationCoreTests",
+      "test_name": "test_missing_country_and_district_are_rejected",
+      "group": "Farmer Profile",
+      "status": "passed",
+      "elapsed_ms": 0.01680001150816679,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_100_points_reaches_level_two",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_100_points_reaches_level_two",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.016600009985268116,
+      "message": ""
+    }
+  ],
+  "tests": [
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_all_valid_statuses_are_accepted",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_all_valid_statuses_are_accepted",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.0665000407025218,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_invalid_decimal_payload_is_rejected",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_invalid_decimal_payload_is_rejected",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.0241999514400959,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_invalid_status_is_rejected",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_invalid_status_is_rejected",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.01409999094903469,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_missing_crop_and_farm_are_rejected",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_missing_crop_and_farm_are_rejected",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.010899966582655907,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_missing_planting_date_is_rejected",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_missing_planting_date_is_rejected",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.010800082236528397,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_negative_land_area_is_rejected",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_negative_land_area_is_rejected",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.008800067007541656,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_valid_crop_record_passes_validation",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_valid_crop_record_passes_validation",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.008900067768990993,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.CropRecordValidationCoreTests.test_zero_land_area_is_rejected",
+      "class_name": "CropRecordValidationCoreTests",
+      "test_name": "test_zero_land_area_is_rejected",
+      "group": "Crop Records",
+      "status": "passed",
+      "elapsed_ms": 0.009399955160915852,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.FarmerProfileValidationCoreTests.test_missing_country_and_district_are_rejected",
+      "class_name": "FarmerProfileValidationCoreTests",
+      "test_name": "test_missing_country_and_district_are_rejected",
+      "group": "Farmer Profile",
+      "status": "passed",
+      "elapsed_ms": 0.01680001150816679,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.FarmerProfileValidationCoreTests.test_negative_years_experience_is_rejected",
+      "class_name": "FarmerProfileValidationCoreTests",
+      "test_name": "test_negative_years_experience_is_rejected",
+      "group": "Farmer Profile",
+      "status": "passed",
+      "elapsed_ms": 0.011399970389902592,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.FarmerProfileValidationCoreTests.test_valid_farmer_profile_passes_validation",
+      "class_name": "FarmerProfileValidationCoreTests",
+      "test_name": "test_valid_farmer_profile_passes_validation",
+      "group": "Farmer Profile",
+      "status": "passed",
+      "elapsed_ms": 0.011299969628453255,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.FarmerProfileValidationCoreTests.test_zero_total_land_is_rejected",
+      "class_name": "FarmerProfileValidationCoreTests",
+      "test_name": "test_zero_total_land_is_rejected",
+      "group": "Farmer Profile",
+      "status": "passed",
+      "elapsed_ms": 0.009900075383484364,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_farm_area_one_hectare_calculation",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_farm_area_one_hectare_calculation",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.009999959729611874,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_haversine_distance_belize_to_jamaica",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_haversine_distance_belize_to_jamaica",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.02380006480962038,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_haversine_same_point_is_zero",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_haversine_same_point_is_zero",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.009900075383484364,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_latitude_above_90_raises_error",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_latitude_above_90_raises_error",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.08809997234493494,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_latitude_below_minus_90_raises_error",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_latitude_below_minus_90_raises_error",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.016000005416572094,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_longitude_above_180_raises_error",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_longitude_above_180_raises_error",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.040499959141016006,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_valid_belize_coordinates_are_accepted",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_valid_belize_coordinates_are_accepted",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.009599956683814526,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GISSpatialCoreTests.test_valid_jamaica_coordinates_are_accepted",
+      "class_name": "GISSpatialCoreTests",
+      "test_name": "test_valid_jamaica_coordinates_are_accepted",
+      "group": "GIS / Spatial",
+      "status": "passed",
+      "elapsed_ms": 0.006499933078885078,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_100_points_reaches_level_two",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_100_points_reaches_level_two",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.016600009985268116,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_500_points_reaches_level_six",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_500_points_reaches_level_six",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.011399970389902592,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_99_points_still_level_one_boundary",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_99_points_still_level_one_boundary",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.00800006091594696,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_active_farmer_crosses_multiple_levels",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_active_farmer_crosses_multiple_levels",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.013899989426136017,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_first_harvest_badge_condition",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_first_harvest_badge_condition",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.007900060154497623,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_forum_helper_badge_condition",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_forum_helper_badge_condition",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.008399947546422482,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_harvest_badge_not_earned_without_harvests",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_harvest_badge_not_earned_without_harvests",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.00700005330145359,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_new_farmer_onboarding_points",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_new_farmer_onboarding_points",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.010299962013959885,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_unknown_action_awards_zero_points",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_unknown_action_awards_zero_points",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.0074999406933784485,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_unknown_badge_is_not_earned",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_unknown_badge_is_not_earned",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.02889998722821474,
+      "message": ""
+    },
+    {
+      "test_id": "tests.test_core_modules.GamificationCoreTests.test_zero_points_starts_at_level_one",
+      "class_name": "GamificationCoreTests",
+      "test_name": "test_zero_points_starts_at_level_one",
+      "group": "Gamification",
+      "status": "passed",
+      "elapsed_ms": 0.008800067007541656,
+      "message": ""
+    }
+  ]
+}
